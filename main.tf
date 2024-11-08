@@ -42,7 +42,7 @@ module "mongodb" {
   instance_type       = var.instance_type                   
   vpc_id              = module.vpc.vpc_id
   vpc_cidr            = var.vpc_cidr                   
-  subnet_id           = module.vpc.private_subnets[0]         
+  subnet_id           = module.vpc.private_subnets       
   bucket_name         = var.bucket_name          
   mongo_db_username   = var.mongo_db_username
   mongo_db_password   = var.mongo_db_password
