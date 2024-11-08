@@ -1,4 +1,4 @@
-# ----- VPC Outputs ------
+ive# ----- VPC Outputs ------
 output "vpc_id" {
   description = "The ID of the VPC"
   value       = module.vpc.vpc_id
@@ -33,4 +33,5 @@ output "mongo_db_instance_id" {
 
 output "mongo_connection_string" {
   value = module.mongodb.connection_string
+  sensitive = true
 }
