@@ -50,3 +50,23 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "Sid" {
+  description = "Sid for Bucket Policy"
+  type        = string
+}
+
+variable "Effect" {
+  description = "Effect of the buckets policy"
+  type        = string
+}
+
+variable "Principal" {
+  description = "The Principal of the policy"
+  type        = string
+}
+
+variable "Action" {
+  description = "Policy Action"
+  type        = string
+}

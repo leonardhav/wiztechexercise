@@ -23,3 +23,21 @@ resource "aws_s3_bucket_public_access_block" "this" {
   ignore_public_acls      = var.ignore_public_acls
   restrict_public_buckets = var.restrict_public_buckets
 }
+
+resource "aws_s3_bucket_policy" "this" {
+  bucket = aws_s3_bucket.this.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = var.Sid
+        Effect    = var.Effect
+        Principal = var.Principal
+        Action    = var.Action
+        Resource  = "${aws_s3_bucket.this.arn}/*"
+      }
+    ]
+  })
+   depends_on = [aws_s3_bucket_public_access_block.this]
+}

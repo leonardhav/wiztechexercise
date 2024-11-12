@@ -3,5 +3,5 @@ output "mongo_db_instance_id" {
 }
 
 output "connection_string" {
-  value = "mongodb://${var.mongo_db_username}:${var.mongo_db_password}@${aws_instance.mongo_db_instance.public_ip}:27017"
+  value = "mongodb://${var.mongo_db_username}:${var.mongo_db_password}@${aws_instance.mongo_db_instance.private_ip}:27017/admin"
 }

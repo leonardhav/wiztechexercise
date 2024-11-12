@@ -45,3 +45,22 @@ variable "environment" {
   description = "Environment name"
   type        = string
 }
+
+variable "public_subnet_tags" {
+  description = "Tags for public subnets"
+  type        = map(string)
+  default     = {
+    Name                   = "Public Subnet"
+    "kubernetes.io/role/elb" = "1"
+    
+    
+  }
+}
+
+variable "private_subnet_tags" {
+  description = "Tags for private subnets"
+  type        = map(string)
+  default     = {
+    "kubernetes.io/role/internal-elb" = "1"
+  }
+}

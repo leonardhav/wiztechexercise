@@ -85,13 +85,17 @@ resource "aws_instance" "mongo_db_instance" {
   ami           = data.aws_ami.ubuntu.id  # Use a valid MongoDB-compatible Linux AMI
   instance_type = var.instance_type
   subnet_id     = var.subnet_id
-  security_groups = [aws_security_group.mongo_db_sg.name]
+  security_groups = [aws_security_group.mongo_db_sg.id]
   iam_instance_profile = aws_iam_instance_profile.mongo_db_profile.name
+  associate_public_ip_address = true
 
   user_data = <<-EOF
     #!/bin/bash
     apt-get update -y
     apt-get install -y mongodb
+
+    sed -i 's/^bind_ip.*/bind_ip = 0.0.0.0/' /etc/mongodb.conf
+
     systemctl start mongodb
     systemctl enable mongodb
 

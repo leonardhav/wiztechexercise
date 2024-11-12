@@ -21,6 +21,10 @@ module "vpc" {
   enable_dns_hostnames = true
   enable_dns_support   = true
 
+  public_subnet_tags    = var.public_subnet_tags
+  private_subnet_tags   = var.private_subnet_tags
+
+
   tags = {
     Terraform   = "true"
     Environment = var.environment
