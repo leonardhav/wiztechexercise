@@ -99,6 +99,26 @@ variable "acl" {
   default     = "private"
 }
 
+variable "Sid" {
+  description = "Sid for Bucket Policy"
+  type        = string
+}
+
+variable "Effect" {
+  description = "Effect of the buckets policy"
+  type        = string
+}
+
+variable "Principal" {
+  description = "The Principal of the policy"
+  type        = string
+}
+
+variable "Action" {
+  description = "Policy Action"
+  type        = string
+}
+
 # ----- MongoDB Variables -----
 variable "instance_type" {
   description = "Instance type for the MongoDB EC2 instance"
@@ -121,3 +141,56 @@ variable "ami" {
   description = "AMI ID for the MongoDB EC2 instance"
   type        = string
 }
+
+# ----- EKS Variables ------
+variable "cluster_name" {
+  description = "EKS Cluster Name"
+  type        = string
+}
+
+variable "cluster_version" {
+  description = "EKS Cluster Version"
+  type        = string
+}
+
+variable "min_size" {
+  description = "Minimum number of nodes in the EKS node group"
+  type        = number
+  default     = 1
+}
+
+variable "max_size" {
+  description = "Maximum number of nodes in the EKS node group"
+  type        = number
+  default     = 3
+}
+
+variable "desired_size" {
+  description = "Desired number of nodes in the EKS node group"
+  type        = number
+  default     = 2
+}
+
+variable "instance_types" {
+  description = "List of EC2 instance types for the EKS node group"
+  type        = list(string)
+  default     = ["t3.medium"]
+}
+
+variable "ami_type" {
+  description = "EKS machine image type"
+  type        = string
+}
+
+
+# ------ ECR Variables -----
+variable "ecr_repository_name" {
+  description = "Repository Name of ECR"
+  type        = string
+}
+
+variable "docker_image_name" {
+  description = "Name of the Docker image"
+  default     = "my-app"
+}
+
