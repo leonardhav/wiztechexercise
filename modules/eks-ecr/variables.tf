@@ -48,20 +48,10 @@ variable "instance_types" {
   default     = ["t3.medium"]
 }
 
-variable "ecr_repository_name" {
-  description = "Name of the ECR repository"
-  type        = string
-}
-
 variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map(string)
   default     = {}
-}
-
-variable "docker_image_name" {
-  description = "Name of the Docker image"
-  default     = "my-app"
 }
 
 variable "ami_type" {

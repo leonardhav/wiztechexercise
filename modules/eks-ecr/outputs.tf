@@ -27,9 +27,3 @@ output "cluster_security_group_id" {
   description = "The security group ID for the EKS cluster"
   value       = module.eks.cluster_security_group_id
 }
-
-# Output for EKS node group role ARN
-output "node_group_role_arn" {
-  description = "The role ARN for the EKS node group"
-  value       = module.eks.eks_managed_node_group_role_arn
-}

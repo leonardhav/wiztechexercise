@@ -68,6 +68,7 @@ module "eks_ecr" {
   cluster_version     = var.cluster_version
   ami_type            = var.ami_type
   
+  
   tags = {
     Environment = "production"
     Project     = "MyApp"
