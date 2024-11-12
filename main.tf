@@ -1,21 +1,21 @@
 # Configure the AWS Provider
 provider "aws" {
   region = var.region
- }
+}
 
 
 # Create VPC
 module "vpc" {
   source = "./modules/vpc"
-  
+
   region          = var.region
   vpc_name        = var.vpc_name
   vpc_cidr        = var.vpc_cidr
   public_subnets  = var.public_subnets
   private_subnets = var.private_subnets
   environment     = var.environment
-  azs             = var.azs 
-  
+  azs             = var.azs
+
 }
 
 # Create S3 Bucket
@@ -43,15 +43,15 @@ module "s3_bucket" {
 # Create EC2 Instance with MongoDB
 
 module "mongodb" {
-  source              = "./modules/mongodb"
-  instance_type       = var.instance_type                   
-  vpc_id              = module.vpc.vpc_id
-  vpc_cidr            = var.vpc_cidr                   
-  subnet_id           = module.vpc.public_subnets[0]      
-  bucket_name         = var.bucket_name          
-  mongo_db_username   = var.mongo_db_username
-  mongo_db_password   = var.mongo_db_password
-  ami                 = var.ami
+  source            = "./modules/mongodb"
+  instance_type     = var.instance_type
+  vpc_id            = module.vpc.vpc_id
+  vpc_cidr          = var.vpc_cidr
+  subnet_id         = module.vpc.public_subnets[0]
+  bucket_name       = var.bucket_name
+  mongo_db_username = var.mongo_db_username
+  mongo_db_password = var.mongo_db_password
+  ami               = var.ami
 
 }
 
@@ -61,14 +61,14 @@ module "mongodb" {
 module "eks_ecr" {
   source = "./modules/eks-ecr"
 
-  region              = var.region
-  vpc_id              = module.vpc.vpc_id
-  subnet_id           = module.vpc.private_subnets
-  cluster_name        = var.cluster_name
-  cluster_version     = var.cluster_version
-  ami_type            = var.ami_type
-  
-  
+  region          = var.region
+  vpc_id          = module.vpc.vpc_id
+  subnet_id       = module.vpc.private_subnets
+  cluster_name    = var.cluster_name
+  cluster_version = var.cluster_version
+  ami_type        = var.ami_type
+
+
   tags = {
     Environment = "production"
     Project     = "MyApp"
@@ -78,7 +78,7 @@ module "eks_ecr" {
 # Create AWS Config
 
 module "aws_config" {
-  source                = "./modules/aws-config"  
+  source                = "./modules/aws-config"
   teams_url             = var.teams_url
   authorized_account_id = var.authorized_account_id
   s3_bucket_name        = var.bucket_name

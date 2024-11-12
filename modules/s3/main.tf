@@ -46,7 +46,8 @@ resource "aws_s3_bucket_policy" "this" {
         }
         Action    = [
           "s3:PutObject",
-          "s3:GetBucketAcl"
+          "s3:GetBucketAcl",
+          "s3:PutObjectAcl"
         ]
         Resource  = [
           "${aws_s3_bucket.this.arn}/aws-config/*",  # Allow write to the aws-config path

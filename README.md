@@ -16,7 +16,8 @@ https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/examples/
 https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html
 
 #### AWS Config Module
-https://github.com/cloudposse/terraform-aws-config
+https://docs.aws.amazon.com/config/latest/developerguide/iamrole-permissions.html#:~:text=To%20record%20your%20AWS%20resource%20configurations%2C%20AWS%20Config,IAM%20role%20that%20you%20assign%20to%20AWS%20Config.
+
 
 ##### MongoDB Backup
 https://github.com/sysboss/mongodb_backup
@@ -37,6 +38,9 @@ https://learn.acloud.guru/course/eks-basics/dashboard
 - eks basics (only worked with K8S before)
 - how to schedule the database backup inside terraform 
 - mongodb needs a restart after deploy before communication is possible
+- insufficient permissions AWS Config
+- SNS Topic pending confirmation -> solved via mail
+
 
 
 ### commands 
@@ -67,6 +71,8 @@ https://learn.acloud.guru/course/eks-basics/dashboard
 #### URL
 https://havekost490.webhook.office.com/webhookb2/18a579d0-e7ab-410a-874f-6649b6723727@27483875-5c74-4b70-8497-d6bc031af783/IncomingWebhook/77fae1bffe144ea490fcc736bac1dbab/17efc37d-3ee0-4f82-a442-b1b95306c03a/V29gp6LGIcVbAQwrjssU54VZWGNPaiKVLK9y14Hfg9F6E1
 
+#### Mailadresse 
+9d841aba.havekost.org@de.teams.ms
 
 
 

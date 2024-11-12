@@ -108,7 +108,7 @@ resource "aws_instance" "mongo_db_instance" {
         roles: ["root"]
       })
 
-    systemctl restart mongodb  
+    sudo systemctl restart mongodb  
     MONGO_SCRIPT
 
     # Configure MongoDB for S3 Backup (simplified)
