@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasky-deployment
+  labels:
+    app: tasky
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tasky
+  template:
+    metadata:
+      labels:
+        app: tasky
+    spec:
+      containers:
+      - name: tasky-container
+        image: leonardhav/tasky-modified:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MONGODB_URI
+          value: "mongodb://dbuser:Keins123@10.0.101.21:27017"
+        - name: SECRET_KEY
+          value: "secret123"

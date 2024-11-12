@@ -75,5 +75,18 @@ module "eks_ecr" {
   }
 }
 
+# Create AWS Config
+
+module "aws_config" {
+  source                = "./modules/aws-config"  
+  teams_url             = var.teams_url
+  authorized_account_id = var.authorized_account_id
+  s3_bucket_name        = var.bucket_name
+  config_role_arn       = module.aws_config.config_role_arn
+  sns_topic_arn         = module.aws_config.sns_topic_arn
+
+}
+
+
 
 

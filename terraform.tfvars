@@ -49,3 +49,10 @@ ecr_repository_name = "lhav-wiztechexercise-ecr-01"
 docker_image_name   = "leonardhav/tasky-modified"
 
 
+# ----- AWS Config -----
+create_sns_topic                 = true
+create_iam_role                  = true
+global_resource_collector_region = "eu-central-1"
+force_destroy                    = true
+teams_url                        = "https://havekost490.webhook.office.com/webhookb2/18a579d0-e7ab-410a-874f-6649b6723727@27483875-5c74-4b70-8497-d6bc031af783/IncomingWebhook/77fae1bffe144ea490fcc736bac1dbab/17efc37d-3ee0-4f82-a442-b1b95306c03a/V29gp6LGIcVbAQwrjssU54VZWGNPaiKVLK9y14Hfg9F6E1"
+authorized_account_id            = "147997145269"

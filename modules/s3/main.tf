@@ -36,6 +36,22 @@ resource "aws_s3_bucket_policy" "this" {
         Principal = var.Principal
         Action    = var.Action
         Resource  = "${aws_s3_bucket.this.arn}/*"
+      },
+      
+      {
+        Sid       = "AllowAWSConfig"
+        Effect    = "Allow"
+        Principal = {
+          Service = "config.amazonaws.com"
+        }
+        Action    = [
+          "s3:PutObject",
+          "s3:GetBucketAcl"
+        ]
+        Resource  = [
+          "${aws_s3_bucket.this.arn}/aws-config/*",  # Allow write to the aws-config path
+          "${aws_s3_bucket.this.arn}"  # Allow access to the bucket ACL itself
+        ]
       }
     ]
   })

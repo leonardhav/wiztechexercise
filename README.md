@@ -15,8 +15,13 @@ https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/examples/
 #### EKS Config
 https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html
 
+#### AWS Config Module
+https://github.com/cloudposse/terraform-aws-config
+
 ##### MongoDB Backup
 https://github.com/sysboss/mongodb_backup
+https://www.tsmean.com/articles/infrastructure/backup-mongodb-to-s3/
+
 
 #### EKS Basics
 https://learn.acloud.guru/course/eks-basics/dashboard
@@ -31,5 +36,37 @@ https://learn.acloud.guru/course/eks-basics/dashboard
 - how to structure the terraform
 - eks basics (only worked with K8S before)
 - how to schedule the database backup inside terraform 
+- mongodb needs a restart after deploy before communication is possible
+
+
+### commands 
+#### Update Kube-Config for AWS Cloud Shell
+- `aws eks update-kubeconfig --region eu-central-1 --name lhav-wiztechexercise-eks-01` 
+
+#### Get the MongoDB Connection String from the Outputs and Paste in deployment.yaml
+
+#### Create the deployment files for Container
+- `sudo vim deployment.yaml` 
+- `sudo vim service.yaml`
+
+#### Deploy the Container and Service
+- `kubectl apply -f deployment.yaml`
+- `kubectl apply -f service.yaml`
+
+#### get DNS name for Application
+- `kubectl get svc`
+
+#### Show wiztechexercise.txt in the Pod
+- `kubectl get pods`
+- `kubectl exec -it <pod-name> -- /bin/sh`
+- `cat /tmp/wiztechexercise.txt`
+
+
+### Teams Webhook
+
+#### URL
+https://havekost490.webhook.office.com/webhookb2/18a579d0-e7ab-410a-874f-6649b6723727@27483875-5c74-4b70-8497-d6bc031af783/IncomingWebhook/77fae1bffe144ea490fcc736bac1dbab/17efc37d-3ee0-4f82-a442-b1b95306c03a/V29gp6LGIcVbAQwrjssU54VZWGNPaiKVLK9y14Hfg9F6E1
+
+
 
 
