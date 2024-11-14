@@ -5,7 +5,7 @@ metadata:
   labels:
     app: tasky
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: tasky
@@ -14,6 +14,7 @@ spec:
       labels:
         app: tasky
     spec:
+      serviceAccountName: webapp-admin-sa
       containers:
       - name: tasky-container
         image: leonardhav/tasky-modified:latest
@@ -21,6 +22,6 @@ spec:
         - containerPort: 8080
         env:
         - name: MONGODB_URI
-          value: "mongodb://dbuser:Keins123@10.0.101.21:27017"
+          value: "mongodb://dbuser:Keins123@10.0.101.60:27017"
         - name: SECRET_KEY
           value: "secret123"

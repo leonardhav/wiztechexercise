@@ -15,8 +15,10 @@ https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/examples/
 #### EKS Config
 https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html
 
-#### AWS Config Module
+#### AWS Config 
 https://docs.aws.amazon.com/config/latest/developerguide/iamrole-permissions.html#:~:text=To%20record%20your%20AWS%20resource%20configurations%2C%20AWS%20Config,IAM%20role%20that%20you%20assign%20to%20AWS%20Config.
+
+https://github.com/awslabs/aws-config-rules/tree/master/aws-config-conformance-packs
 
 
 ##### MongoDB Backup
@@ -26,6 +28,9 @@ https://www.tsmean.com/articles/infrastructure/backup-mongodb-to-s3/
 
 #### EKS Basics
 https://learn.acloud.guru/course/eks-basics/dashboard
+
+#### SNS Topic
+https://ictpro.co.nz/how-to-send-aws-notifications-aws-sns-to-microsoft-teams/
 
 
 ### Constraints 
@@ -40,6 +45,7 @@ https://learn.acloud.guru/course/eks-basics/dashboard
 - mongodb needs a restart after deploy before communication is possible
 - insufficient permissions AWS Config
 - SNS Topic pending confirmation -> solved via mail
+- SNS Topic rate limiting
 
 
 
@@ -47,13 +53,17 @@ https://learn.acloud.guru/course/eks-basics/dashboard
 #### Update Kube-Config for AWS Cloud Shell
 - `aws eks update-kubeconfig --region eu-central-1 --name lhav-wiztechexercise-eks-01` 
 
-#### Get the MongoDB Connection String from the Outputs and Paste in deployment.yaml
+#### Get the MongoDB Connection String from the tfstate-File and Paste in deployment.yaml
 
 #### Create the deployment files for Container
+- `sudo vim service-account.yaml`
+- `sudo vim cluster-role-binding.yaml` 
 - `sudo vim deployment.yaml` 
 - `sudo vim service.yaml`
 
 #### Deploy the Container and Service
+- `kubectl apply -f service-account.yaml`
+- `kubectl apply -f cluster-role-binding.yaml`
 - `kubectl apply -f deployment.yaml`
 - `kubectl apply -f service.yaml`
 
@@ -74,5 +84,12 @@ https://havekost490.webhook.office.com/webhookb2/18a579d0-e7ab-410a-874f-6649b67
 #### Mailadresse 
 9d841aba.havekost.org@de.teams.ms
 
+#### Show SNS Topic Status
+aws sns list-subscriptions-by-topic --topic-arn arn:aws:sns:eu-central-1:147997145269:config-notifications
+
+#### Test SNS Topic
+aws sns publish \
+  --topic-arn arn:aws:sns:eu-central-1:147997145269:config-notifications \
+  --message "This is a test message"
 
 

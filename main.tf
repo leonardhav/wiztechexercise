@@ -56,7 +56,7 @@ module "mongodb" {
 }
 
 
-# Create EKS Cluster and Container Registry
+# Create EKS Cluster 
 
 module "eks_ecr" {
   source = "./modules/eks-ecr"

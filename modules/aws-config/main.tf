@@ -277,13 +277,32 @@ resource "aws_config_delivery_channel" "delivery_channel" {
   s3_key_prefix  = "aws-config"
 }
 
-resource "aws_config_conformance_pack" "hipaa" {
-  name = "operational-best-practices-for-HIPAA-Security"
-  template_body = data.http.conformance_pack.body
+resource "aws_config_conformance_pack" "wasp" {
+  name = "operational-best-practices-for-wasp"
+  template_body = data.http.conformance_pack_wasp.body
 }
 
-data "http" "conformance_pack" {
-  url = "https://raw.githubusercontent.com/awslabs/aws-config-rules/master/aws-config-conformance-packs/Operational-Best-Practices-for-HIPAA-Security.yaml"
+data "http" "conformance_pack_wasp" {
+  url = "https://raw.githubusercontent.com/awslabs/aws-config-rules/refs/heads/master/aws-config-conformance-packs/Operational-Best-Practices-for-AWS-Well-Architected-Security-Pillar.yaml"
+}
+
+
+resource "aws_config_conformance_pack" "eks" {
+  name = "operational-best-practices-for-EKS"
+  template_body = data.http.conformance_pack_eks.body
+}
+
+data "http" "conformance_pack_eks" {
+  url = "https://raw.githubusercontent.com/awslabs/aws-config-rules/refs/heads/master/aws-config-conformance-packs/Security-Best-Practices-for-EKS.yaml"
+}
+
+resource "aws_config_conformance_pack" "s3" {
+  name = "operational-best-practices-for-s3"
+  template_body = data.http.conformance_pack_s3.body
+}
+
+data "http" "conformance_pack_s3" {
+  url = "https://raw.githubusercontent.com/awslabs/aws-config-rules/refs/heads/master/aws-config-conformance-packs/Operational-Best-Practices-for-Amazon-S3.yaml"
 }
 
 
@@ -310,15 +329,15 @@ resource "aws_sns_topic" "config_notifications" {
 resource "aws_sns_topic_subscription" "email_subscription_to_teams" {
   topic_arn = aws_sns_topic.config_notifications.arn
   protocol  = "email"
-  endpoint  = "9d841aba.havekost.org@de.teams.ms" 
+  endpoint  = "d4672dba.havekost490.onmicrosoft.com@de.teams.ms" 
 }
 
-
-resource "aws_sns_topic_subscription" "teams_webhook" {
+resource "aws_sns_topic_subscription" "email_subscription_to_admin" {
   topic_arn = aws_sns_topic.config_notifications.arn
-  protocol  = "https"
-  endpoint  = var.teams_url
+  protocol  = "email"
+  endpoint  = "leonard@havekost.org" 
 }
+
 
 resource "aws_sns_topic_policy" "config_policy" {
   arn = aws_sns_topic.config_notifications.arn
@@ -337,5 +356,10 @@ resource "aws_sns_topic_policy" "config_policy" {
       }
     ]
   })
+}
+
+resource "aws_config_configuration_recorder_status" "enabled" {
+  name    = aws_config_configuration_recorder.recorder.name
+  is_enabled = true
 }
 

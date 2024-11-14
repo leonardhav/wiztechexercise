@@ -108,11 +108,33 @@ resource "aws_instance" "mongo_db_instance" {
         roles: ["root"]
       })
 
-    sudo systemctl restart mongodb  
+     
     MONGO_SCRIPT
 
+    sudo systemctl restart mongodb 
+
     # Configure MongoDB for S3 Backup (simplified)
-    echo "backup configuration commands here..."
+    apt install -y awscli
+
+    # Step 2: Clone the MongoDB Backup Repository
+    echo "Cloning mongodb_backup repository from GitHub..."
+    git clone https://github.com/sysboss/mongodb_backup.git /home/ubuntu/mongodb_backup
+
+    # Step 3: Change permissions to make MongoBackup.sh executable
+    echo "Making MongoBackup.sh executable..."
+    chmod +x /home/ubuntu/mongodb_backup/MongoBackup.sh
+
+    # Step 4: Set permissions on /var/run (make sure it's accessible)
+    echo "Setting permissions for /var/run..."
+    chmod +x /var/run
+
+    # Step 5: Set up the cron job to run every 5 minutes
+    echo "Setting up the cron job to run the backup script every 5 minutes..."
+    crontab -l > /tmp/current_cron
+    echo "*/5 * * * * /home/ubuntu/mongodb_backup/MongoBackup.sh -b ${var.bucket_name} -k 7 >> /home/ubuntu/backup.log 2>&1" >> /tmp/current_cron
+    crontab /tmp/current_cron
+    rm /tmp/current_cron
+
   EOF
 }
 
