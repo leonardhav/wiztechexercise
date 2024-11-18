@@ -329,7 +329,7 @@ resource "aws_sns_topic" "config_notifications" {
 resource "aws_sns_topic_subscription" "email_subscription_to_teams" {
   topic_arn = aws_sns_topic.config_notifications.arn
   protocol  = "email"
-  endpoint  = "d4672dba.havekost490.onmicrosoft.com@de.teams.ms" 
+  endpoint  = "1b6ec84b.havekost.org@de.teams.ms" 
 }
 
 resource "aws_sns_topic_subscription" "email_subscription_to_admin" {
